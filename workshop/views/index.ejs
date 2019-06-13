@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+ <head>
+ <title>Cadastro de Clientes</title>
+ <link rel="stylesheet" href="/stylesheets/style.css" />
+ <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+ 
+ <style>
+    body {
+    	background: #4ed287;
+    }
+ 	.my-own-card {
+ 		background:white;
+ 		border-radius:3px;
+ 	}
+
+ 	.bg-green {
+ 		background:#4bba7b;
+ 		border-radius:3px;
+ 	}
+ 	#quantidade-clientes {
+ 		text-align:center;
+ 		margin-top:55px;
+ 	}
+ 	#quantidade-clientes h2 {
+ 		font-size:70px;
+ 	}
+ 	#quantidade-clientes b {
+ 		opacity:0.60;
+ 	}
+ </style>
+ </head>
+ <body>
+	 
+	<div class="container">
+
+		<div class="row">
+			<div class="col-md-12 bg-green">
+				<h1>Listagem de Clientes</h1>
+			</div>
+		</div>
+        <br>
+
+        <div class="row">
+        	
+        	<div class="col-md-6" style="padding-left:0">
+        		<div class="card">
+				    <div class="card-body">
+				        <div id="piechart"></div>
+				    </div>
+				</div>
+        	</div>
+
+			<div class="col-md-6" style="padding-right:0;">
+				<div class="card">
+				    <div class="card-body">
+					    <div id="quantidade-clientes" style="height:146px">
+							<b>Clientes</b> <br>
+							<h2><%= docs.length%></h2>
+						</div>
+				    </div>
+			    </div>
+			</div>
+       
+        </div>
+
+        <br>
+
+		<div class="row">
+			<div class="col-md-12 my-own-card">
+
+				<table class="table">
+					<thead>
+						<th>Nome</th>
+						<th>Idade</th>
+						<th>
+						    <a href="/cadastrar" class="btn btn-sm btn-success" style="float:right">Novo Cliente</a>
+						</th>
+					</thead>
+					<tbody>
+						<% if ( ! docs || docs.length == 0) { %>
+						  <tr>
+						  	<td>Nenhum cliente cadastrado.</td>
+						  </tr>
+						<% } else { docs.forEach(function(customer) { %>
+						    <tr>
+						     	<td><%= customer.nome %></td>
+						     	<td><%= customer.idade %></td>
+						     	<td>
+						     		<a href="/editar/<%= customer._id%>" class="btn btn-sm btn-primary">Editar</a>
+						     		<a href="/delete/<%= customer._id%>" class="btn btn-sm btn-danger">Deletar</a>
+						     	</td>	
+						    </tr>  
+						<% }) } %>
+					</tbody>
+				</table>
+				
+			</div>
+			
+		</div>
+		
+	</div>
+
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Day'],
+          ['Criança',     <%= faixaEtaria.crianca %>],
+          ['Adolescente',      <%= faixaEtaria.adolescente %>],
+          ['Jovem',  <%= faixaEtaria.jovem %>],
+          ['Adulto', <%= faixaEtaria.adulto %>],
+          ['Idoso',    <%= faixaEtaria.idoso %>]
+        ]);
+
+        var options = {
+          title: 'Faixa etária'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+      }
+    </script>
+
+ </body>
+</html>

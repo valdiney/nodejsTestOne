@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+ <head>
+ <title>Cadastro de Clientes</title>
+ <link rel="stylesheet" href="/stylesheets/style.css" />
+ <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+ 
+ <style>
+    body {
+    	background: #4ed287;
+    }
+ 	.my-own-card {
+ 		background:white;
+ 		border-radius:3px;
+ 	}
+
+ 	.bg-green {
+ 		background:#4bba7b;
+ 		border-radius:3px;
+ 	}
+ </style>
+ </head>
+ <body>
+	 
+	<div class="container">
+
+		<div class="row">
+			<div class="col-md-12 bg-green">
+				<h1>Cadastrar Cliente</h1>
+			</div>
+		</div>
+        <br>
+		<div class="row">
+
+			<div class="col-md-12 my-own-card">
+				
+				    <form method="post" action="/new">
+				
+					<div class="form-group row" style="padding:10px">
+						<div class="col-md-6">
+						    <label for="ex1">Nome</label>
+						    <input name="nome" class="form-control" id="ex1" type="text">
+						</div>
+
+						<div class="col-md-6">
+						    <label for="ex2">Idade</label>
+						    <input name="idade" class="form-control" id="ex2" type="number">
+						</div>
+
+						<div class="col-md-12">
+							<br>
+							<button type="submit" class="btn btn-primary">Salvar</button>
+						</div>	
+					</div>
+			    </form>
+				
+			</div>
+			
+		</div>
+		
+	</div>
+
+ </body>
+</html>
