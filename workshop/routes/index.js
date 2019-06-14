@@ -9,8 +9,9 @@ router.get('/', function(req, res) {
   	}
 
   	faixaEtaria = global.db.faixaEtaria(docs);
+  	sexo = global.db.sexo(docs);
 
-  	res.render('index',  {docs, faixaEtaria})
+  	res.render('index',  {docs, faixaEtaria, sexo})
   })
   
 });
@@ -35,11 +36,13 @@ router.get('/editar/:id', function(req, res) {
 
 /* GET home page. */
 router.post('/editar', function(req, res) {
-  const nome = req.body.nome;
-  const idade = req.body.idade;
   const id = req.body.id;
 
-  global.db.updateOne(id, nome, idade, (e, docs) => {
+  const nome = req.body.nome;
+  const idade = req.body.idade;
+  const sexo = req.body.sexo;
+  
+  global.db.updateOne(id, {nome, idade, sexo}, (e, docs) => {
   	if (e) {
   		return console.log(e);
   	}
@@ -52,7 +55,8 @@ router.post('/editar', function(req, res) {
 router.post('/new', function(req, res, next) {
 	const nome = req.body.nome;
 	const idade = parseInt(req.body.idade);
-	global.db.insert({nome, idade}, (err, result) => {
+	const sexo = req.body.sexo;
+	global.db.insert({nome, idade, sexo}, (err, result) => {
 		if (err) {
 			return console.log(err);
 		}

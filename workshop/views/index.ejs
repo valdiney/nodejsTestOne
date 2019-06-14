@@ -13,7 +13,6 @@
  		background:white;
  		border-radius:3px;
  	}
-
  	.bg-green {
  		background:#4bba7b;
  		border-radius:3px;
@@ -43,7 +42,7 @@
 
         <div class="row">
         	
-        	<div class="col-md-6" style="padding-left:0">
+        	<div class="col-md-4" style="padding-left:0">
         		<div class="card">
 				    <div class="card-body">
 				        <div id="piechart"></div>
@@ -51,7 +50,15 @@
 				</div>
         	</div>
 
-			<div class="col-md-6" style="padding-right:0;">
+        	<div class="col-md-4" style="padding-right:0;">
+				<div class="card">
+				    <div class="card-body">
+						<div id="chart-sexo"></div>
+				    </div>
+			    </div>
+			</div>
+
+			<div class="col-md-4" style="padding-right:0;">
 				<div class="card">
 				    <div class="card-body">
 					    <div id="quantidade-clientes" style="height:146px">
@@ -61,7 +68,7 @@
 				    </div>
 			    </div>
 			</div>
-       
+
         </div>
 
         <br>
@@ -73,6 +80,7 @@
 					<thead>
 						<th>Nome</th>
 						<th>Idade</th>
+						<th>Sexo</th>
 						<th>
 						    <a href="/cadastrar" class="btn btn-sm btn-success" style="float:right">Novo Cliente</a>
 						</th>
@@ -86,6 +94,7 @@
 						    <tr>
 						     	<td><%= customer.nome %></td>
 						     	<td><%= customer.idade %></td>
+						     	<td><%= customer.sexo %></td>
 						     	<td>
 						     		<a href="/editar/<%= customer._id%>" class="btn btn-sm btn-primary">Editar</a>
 						     		<a href="/delete/<%= customer._id%>" class="btn btn-sm btn-danger">Deletar</a>
@@ -123,6 +132,28 @@
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+      }
+
+
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawSexoChart);
+
+      function drawSexoChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Day'],
+          ['Masculino',     <%= sexo.masculino %>],
+          ['Feminino',      <%= sexo.feminino %>],
+          ['Não informado', <%= sexo.naoInformado %>]
+        ]);
+
+        var options = {
+          title: 'Sexo'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('chart-sexo'));
 
         chart.draw(data, options);
       }

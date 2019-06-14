@@ -22,8 +22,8 @@ function findOne(id, callback) {
 	global.conn.collection('customers').find({_id: ObjectId(id)}).toArray(callback);
 }
 
-function updateOne(id, nome, idade, callback) {
-	global.conn.collection('customers').updateOne({_id: ObjectId(id)}, {$set: {nome: nome, idade:idade}}, callback);
+function updateOne(id, customer, callback) {
+	global.conn.collection('customers').updateOne({_id: ObjectId(id)}, customer, callback);
 }
 
 function faixaEtaria(docs, callback) {
@@ -59,4 +59,28 @@ function faixaEtaria(docs, callback) {
     return faixaEtaria;
 }
 
-module.exports = { findAll, insert, deleteOne, findOne, updateOne, faixaEtaria }
+function sexo(docs, callback) {
+	var sexo = {
+		masculino: 0,
+		feminino: 0,
+		naoInformado: 0
+	}
+
+	docs.forEach(function(customer) {
+		if (customer.sexo == "Masculino") {
+			sexo.masculino += 1;
+		} else if (customer.sexo == "Feminino") {
+			sexo.feminino += 1;
+		} else {
+			sexo.naoInformado += 1;
+		}
+	});
+
+	sexo.masculino = (sexo.masculino + sexo.feminino) * sexo.masculino / 100;
+	sexo.feminino = (sexo.masculino + sexo.feminino) * sexo.feminino / 100;
+	sexo.naoInformado = (sexo.masculino + sexo.feminino) * sexo.naoInformado / 100;
+
+	return sexo;
+}
+
+module.exports = { findAll, insert, deleteOne, findOne, updateOne, faixaEtaria, sexo }

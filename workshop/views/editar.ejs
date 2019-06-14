@@ -38,15 +38,24 @@
 				
 					<div class="form-group row" style="padding:10px">
 						<input type="hidden" name="id" value="<%= docs[0]._id%>">
-						<div class="col-md-6">
+						<div class="col-md-4">
 						    <label for="ex1">Nome</label>
 						    <input name="nome" class="form-control" id="ex1" type="text" 
 						    value="<%= docs[0].nome %>">
 						</div>
 
-						<div class="col-md-6">
+						<div class="col-md-4">
 						    <label for="ex2">Idade</label>
 						    <input name="idade" class="form-control" id="ex2" type="number" value="<%= docs[0].idade %>">
+						</div>
+
+						<div class="col-md-4">
+						    <label for="ex2">Sexo</label>
+						    <select name="sexo" class="form-control">
+						    	<option value="">Selecione</option>
+						    	<option value="Masculino">Masculino</option>
+						    	<option value="Feminino">Feminino</option>
+						    </select>
 						</div>
 
 						<div class="col-md-12">
