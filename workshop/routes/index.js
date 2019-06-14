@@ -8,41 +8,7 @@ router.get('/', function(req, res) {
   		return console.log(e);
   	}
 
-    var faixaEtaria = {
-    	crianca: 0,
-	    adolescente: 0,
-	    jovem: 0,
-	    adulto: 0,
-	    idoso: 0
-    }
-
-    docs.forEach(function(customer) {
-    	if (customer.idade > 0 && customer.idade <= 11) {
-            faixaEtaria.crianca += 1;
-	    }
-
-	    if (customer.idade >= 12 && customer.idade <= 17) {
-	        faixaEtaria.adolescente += 1;
-	    }
-
-	    if (customer.idade >= 18 && customer.idade <= 29) {
-	        faixaEtaria.jovem += 1;
-	    }
-
-	    if (customer.idade >= 30 && customer.idade <= 60) {
-	        faixaEtaria.adulto += 1;
-	    }
-
-	    if (customer.idade > 60) {
-	        faixaEtaria.idoso += 1;
-	    }
-    });
-
-    faixaEtaria.crianca = (faixaEtaria.adolescente + faixaEtaria.jovem + faixaEtaria.adulto + faixaEtaria.idoso) * faixaEtaria.crianca / 100;
-    faixaEtaria.adolescente = (faixaEtaria.adolescente + faixaEtaria.jovem + faixaEtaria.adulto + faixaEtaria.idoso) * faixaEtaria.adolescente / 100;
-    faixaEtaria.jovem = (faixaEtaria.adolescente + faixaEtaria.jovem + faixaEtaria.adulto + faixaEtaria.idoso) * faixaEtaria.jovem / 100;
-    faixaEtaria.adulto = (faixaEtaria.adolescente + faixaEtaria.jovem + faixaEtaria.adulto + faixaEtaria.idoso) * faixaEtaria.adulto / 100;
-    faixaEtaria.idoso = (faixaEtaria.adolescente + faixaEtaria.jovem + faixaEtaria.adulto + faixaEtaria.idoso) * faixaEtaria.idoso / 100;
+  	faixaEtaria = global.db.faixaEtaria(docs);
 
   	res.render('index',  {docs, faixaEtaria})
   })
