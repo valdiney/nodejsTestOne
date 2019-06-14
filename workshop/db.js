@@ -1,5 +1,5 @@
 var mongoClient = require('mongodb').MongoClient;
-mongoClient.connect('mongodb://valdiney:33473347@cluster0-shard-00-00-i0akk.mongodb.net:27017,cluster0-shard-00-01-i0akk.mongodb.net:27017,cluster0-shard-00-02-i0akk.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority')
+mongoClient.connect('mongodb://valdiney:33473347@cluster0-shard-00-00-i0akk.mongodb.net:27017,cluster0-shard-00-01-i0akk.mongodb.net:27017,cluster0-shard-00-02-i0akk.mongodb.net:27017/meubanco?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority')
 //mongoClient.connect('mongodb://localhost:27017/meubanco')
  .then(conn => global.conn = conn)
  .catch(err => console.log(err))
