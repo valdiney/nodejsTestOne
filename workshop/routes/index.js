@@ -9,15 +9,9 @@ router.get('/', function(req, res) {
 	MongoClient.connect(url, function(err, db) {
 		if (err) throw err;
 		
-		var customers = db.collection('customers').find({}).sort({nome: 1}).toArray(function(err, result) {
-             console.log(result);
-             var docs = result;
-
-             res.render('index',  {docs})
-
+		global.db.findAll(db, (e, docs) => {
+			res.render('index',  {docs})
 		})
-		
-
 	})
 })
 
