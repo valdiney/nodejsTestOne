@@ -3,9 +3,7 @@
 /**
  * Module dependencies.
  */
-//global.db = require('../db');
-
-global.db = require('../db2');
+global.db = require('../db');
 
 var app = require('../app');
 var debug = require('debug')('workshop:server');
