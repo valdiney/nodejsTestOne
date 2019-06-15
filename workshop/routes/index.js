@@ -10,7 +10,10 @@ router.get('/', function(req, res) {
 		if (err) throw err;
 		
 		global.db.findAll(db, (e, docs) => {
-			res.render('index',  {docs})
+			faixaEtaria = global.db.faixaEtaria(docs);
+  	        sexo = global.db.sexo(docs);
+
+			res.render('index',  {docs, faixaEtaria, sexo})
 		})
 	})
 })

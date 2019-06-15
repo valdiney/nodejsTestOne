@@ -113,7 +113,53 @@
 	</div>
 
 
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
 
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Day'],
+          ['Criança',     <%= faixaEtaria.crianca %>],
+          ['Adolescente',      <%= faixaEtaria.adolescente %>],
+          ['Jovem',  <%= faixaEtaria.jovem %>],
+          ['Adulto', <%= faixaEtaria.adulto %>],
+          ['Idoso',    <%= faixaEtaria.idoso %>]
+        ]);
+
+        var options = {
+          title: 'Faixa etária'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+      }
+
+
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawSexoChart);
+
+      function drawSexoChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Day'],
+          ['Masculino',     <%= sexo.masculino %>],
+          ['Feminino',      <%= sexo.feminino %>],
+          ['Não informado', <%= sexo.naoInformado %>]
+        ]);
+
+        var options = {
+          title: 'Sexo'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('chart-sexo'));
+
+        chart.draw(data, options);
+      }
+    </script>
 
  </body>
 </html>
