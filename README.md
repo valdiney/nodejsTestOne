@@ -1,2 +1,2 @@
 # nodejsTestOne
-My first little application using nodejs, expess and mongodb
+My first little application using nodejs, express and mongodb
