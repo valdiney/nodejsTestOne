@@ -14,8 +14,7 @@ router.get('/', function(req, res) {
   	        sexo = global.db.sexo(docs);
             
             global.db.top4Profissoes(db, (e, profissoes) => {
-              console.log(profissoes);
-			  res.render('index',  {docs, faixaEtaria, sexo, profissoes})
+			    res.render('index',  {docs, faixaEtaria, sexo, profissoes})
 		    })
 		})
 	})
