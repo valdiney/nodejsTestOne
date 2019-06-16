@@ -21,6 +21,10 @@ function updateOne(db, id, customer, callback) {
 	db.collection('customers').updateOne({_id: ObjectId(id)}, customer, callback);
 }
 
+function top4Profissoes(db,callback) {
+	db.collection('customers').aggregate([{$group: {_id:"$profissao", numProfissao: {$sum:1}}}]).sort({numProfissao:-1}).toArray(callback);	
+}
+
 function faixaEtaria(docs, callback) {
 
 	var faixaEtaria = {
@@ -78,4 +82,4 @@ function sexo(docs, callback) {
 	return sexo;
 }
 
-module.exports = { findAll, insert, deleteOne, findOne, updateOne, faixaEtaria, sexo }
+module.exports = { findAll, insert, deleteOne, findOne, updateOne, faixaEtaria, sexo, top4Profissoes }

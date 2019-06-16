@@ -61,10 +61,7 @@
 			<div class="col-md-4" style="padding-right:0;">
 				<div class="card">
 				    <div class="card-body">
-					    <div id="quantidade-clientes" style="height:146px">
-							<b>Clientes</b> <br>
-							<h2><%= docs.length%></h2>
-						</div>
+					    <div id="chart-profissoes"></div>
 				    </div>
 			    </div>
 			</div>
@@ -76,12 +73,12 @@
 		<div class="row">
 			<div class="col-md-12 my-own-card">
 
-				<table class="table">
+				<table class="table table-striped">
 					<thead>
 						<th>Nome</th>
 						<th>Idade</th>
 						<th>Sexo</th>
-						<th>Profissao</th>
+						<th>Profissão</th>
 						<th>
 						    <a href="/cadastrar" class="btn btn-sm btn-success" style="float:right">Novo Cliente</a>
 						</th>
@@ -159,6 +156,36 @@
 
         chart.draw(data, options);
       }
+
+
+      google.charts.load('current', {packages: ['corechart', 'bar']});
+	  google.charts.setOnLoadCallback(drawBasic);
+
+		function drawBasic() {
+
+	      var data = google.visualization.arrayToDataTable([
+	      	['Profissões', 'Profissões'],
+	      	<%profissoes.forEach(function(docProfissao) {%>
+		        ['<%=docProfissao._id%>', <%=docProfissao.numProfissao%>],
+		    <%})%>
+	      ]);
+
+	      var options = {
+	        title: 'Top 4 Profissões mais cadastradas',
+	        chartArea: {width: '50%'},
+	        hAxis: {
+	          title: 'Total',
+	          minValue: 0
+	        },
+	        vAxis: {
+	          title: 'Profissões'
+	        }
+	      };
+
+	      var chart = new google.visualization.BarChart(document.getElementById('chart-profissoes'));
+
+	      chart.draw(data, options);
+    }
     </script>
 
  </body>

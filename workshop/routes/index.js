@@ -8,12 +8,15 @@ var url = 'mongodb://valdiney:33473347@cluster0-shard-00-00-i0akk.mongodb.net:27
 router.get('/', function(req, res) {
 	MongoClient.connect(url, function(err, db) {
 		if (err) throw err;
-		
+
 		global.db.findAll(db, (e, docs) => {
 			faixaEtaria = global.db.faixaEtaria(docs);
   	        sexo = global.db.sexo(docs);
-
-			res.render('index',  {docs, faixaEtaria, sexo})
+            
+            global.db.top4Profissoes(db, (e, profissoes) => {
+              console.log(profissoes);
+			  res.render('index',  {docs, faixaEtaria, sexo, profissoes})
+		    })
 		})
 	})
 })
@@ -25,7 +28,7 @@ router.get('/cadastrar', function(req, res) {
 
 /* GET tela de editar. */
 router.get('/editar/:id', function(req, res) {
-	var id = req.params.id;
+	const id = req.params.id;
 
 	MongoClient.connect(url, function(err, db) {
 		if (err) throw err;
@@ -40,12 +43,11 @@ router.get('/editar/:id', function(req, res) {
 
 /* POST editar. */
 router.post('/editar', function(req, res) {
-  const id = req.body.id;
-
-  const nome = req.body.nome;
-  const idade = req.body.idade;
-  const sexo = req.body.sexo;
-  const profissao = req.body.profissao;
+	const id = req.body.id;
+	const nome = req.body.nome;
+	const idade = req.body.idade;
+	const sexo = req.body.sexo;
+	const profissao = req.body.profissao;
 
     MongoClient.connect(url, function(err, db) {
     	if (err) throw err;
@@ -76,7 +78,7 @@ router.post('/new', function(req, res, next) {
 
 /*GET deletar*/
 router.get('/delete/:id', function(req, res) {
-	var id = req.params.id;
+	const id = req.params.id;
 
 	MongoClient.connect(url, function(err, db) {
     	if (err) throw err;
